@@ -1,4 +1,4 @@
-function buildTree (arrayData, levels) {
+function buildLayer (arrayData, levels) {
   function process (currentLevelIndex, parentValue) {
     let data = []
     const nodes = []
@@ -172,5 +172,46 @@ function test () {
       }
   ]
 
-  return buildTree(data, levels)
+  return buildLayer(data, levels)
+}
+
+
+
+
+
+
+const flatTreeData = [
+  {id: 1, parent: null, label: 'one'},
+  {id: 2, parent: 1, label: 'two'},
+  {id: 3, parent: 1, label: 'three'},
+  {id: 4, parent: 1, label: 'four'},
+  {id: 5, parent: 2, label: 'five'},
+  {id: 6, parent: 2, label: 'six'},
+  {id: 7, parent: 3, label: 'seven'},
+  {id: 8, parent: 4, label: 'eight'}
+]
+
+function buildTree (flatData = [], options = { key: 'id', parentKey: 'parent' }) {
+  const KEY = options.key
+  const PARENT_KEY = options.parentKey
+
+  function process (value) {
+    const children = []
+    for (let i = 0; i < flatData.length; i++) {
+      const node = flatData[i]
+      if (node[PARENT_KEY] === value) {
+        children.push(Object.assign(Object.create(null), node, { children: process(node[KEY]) }))
+      }
+    }
+    return children.length > 0 ? children : null
+  }
+
+
+  return flatData
+    .filter(d => !d[PARENT_KEY])
+    .map(d => Object.assign(Object.create(null), d, { children: process(d[KEY]) }))
+}
+
+function test () {
+  buildTree(flatTreeData)
 }
