@@ -1,0 +1,19 @@
+{
+  "name": "tree-builder",
+  "version": "0.0.1",
+  "description": "",
+  "main": "tree-builder.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackgit/tree-builder.git"
+  },
+  "author": "ygjack414@hotmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jackgit/tree-builder/issues"
+  },
+  "homepage": "https://github.com/jackgit/tree-builder#readme"
+}
